@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
 
     if (category) query.category = category;
     if (status) query.status = status;
-
+    console.log(search);
     if (search) {
       query.$or = [
         { name: { $regex: search, $options: "i" } },
@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
       .sort({ [sortBy]: sortOrder })
       .skip((page - 1) * limit)
       .limit(limit);
-
+    console.log(products);
     const response: IApiResponse<IProduct[]> = {
       message: "Product Fetched successfully.",
       status: true,
@@ -52,6 +52,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(response, { status: 201 });
   } catch (error: unknown) {
+    console.log(error);
     return NextResponse.json(
       { message: "Internal server error", error: error },
       { status: 500 }

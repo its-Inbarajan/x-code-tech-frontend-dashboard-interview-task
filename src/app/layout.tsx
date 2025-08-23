@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/ui/navbar/navbar";
+import { ThemeProvider } from "@/context/themeContext";
+import { Toaster } from "@/components/ui/toast/toast";
+import { ProductProvider } from "@/context/productContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +31,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <main className="dark:bg-gray-900 grid grid-cols-1 md:grid-cols-12 min-h-dvh">
+          <ProductProvider>
+            <ThemeProvider>
+              <header className="col-span-1 md:col-span-12 fixed w-full">
+                <Navbar />
+              </header>
+              <div className="overflow-auto mt-14 py-2 md:col-span-12 lg:col-span-12">
+                {children}
+              </div>
+            </ThemeProvider>
+          </ProductProvider>
+          <Toaster />
+        </main>
       </body>
     </html>
   );
