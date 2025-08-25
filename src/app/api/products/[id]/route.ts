@@ -6,11 +6,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   await connectDB();
   try {
-    const { id } = params;
+    const { id } = await params;
     const find = await PRODUCT.findById(id);
 
     if (!find) {
@@ -41,11 +41,11 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await req.json();
-    const { id } = params;
+    const { id } = await params;
     const { name, price, stock, category, status, vendor } = body;
     const find = await PRODUCT.findById(id);
 
@@ -86,10 +86,10 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const find = await PRODUCT.findById(id);
 
     if (!find) {

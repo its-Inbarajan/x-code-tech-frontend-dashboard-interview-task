@@ -1,3 +1,4 @@
+"use client";
 import { IProduct } from "@/@types/product";
 import { Button } from "@/components/ui/button/button";
 import {

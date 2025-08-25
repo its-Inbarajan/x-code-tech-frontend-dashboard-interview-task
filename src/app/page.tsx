@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button/button";
 import {
   DropdownMenu,
@@ -128,7 +128,7 @@ export default function Home() {
     [getProducts, searchParams, router]
   );
 
-  const handleFilter = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setQuery((prev) => {
       const newQuery = { ...prev, [name]: value };
@@ -138,7 +138,7 @@ export default function Home() {
   };
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value, type } = e.target;
 
@@ -148,7 +148,7 @@ export default function Home() {
     }));
   };
 
-  function handleSubmit(e: FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     createProduct(formState as Partial<IProduct>);
     setFormState((pre) => ({
@@ -166,7 +166,7 @@ export default function Home() {
     }));
   }
 
-  function handleUpdateSubmit(e: FormEvent) {
+  function handleUpdateSubmit(e: React.FormEvent) {
     e.preventDefault();
     const id = localStorage.getItem("productId") as string;
     updateProductsById(id, formState as Partial<IProduct>);

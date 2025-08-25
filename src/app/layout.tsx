@@ -5,6 +5,8 @@ import { Navbar } from "@/components/ui/navbar/navbar";
 import { ThemeProvider } from "@/context/themeContext";
 import { Toaster } from "@/components/ui/toast/toast";
 import { ProductProvider } from "@/context/productContext";
+import React from "react";
+import { Loader } from "@/components/ui/loader/loader";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -27,12 +29,20 @@ export default function RootLayout({
         <main className="dark:bg-gray-900 grid grid-cols-1 md:grid-cols-12 min-h-dvh">
           <ProductProvider>
             <ThemeProvider>
-              <header className="col-span-1 md:col-span-12 fixed z-50 w-full">
-                <Navbar />
-              </header>
-              <div className="overflow-auto mt-14 py-2 md:col-span-12 lg:col-span-12">
-                {children}
-              </div>
+              <React.Suspense
+                fallback={
+                  <div>
+                    <Loader className="flex items-center justify-center" />
+                  </div>
+                }
+              >
+                <header className="col-span-1 md:col-span-12 fixed z-50 w-full">
+                  <Navbar />
+                </header>
+                <div className="overflow-auto mt-14 py-2 md:col-span-12 lg:col-span-12">
+                  {children}
+                </div>
+              </React.Suspense>
             </ThemeProvider>
           </ProductProvider>
           <Toaster />
