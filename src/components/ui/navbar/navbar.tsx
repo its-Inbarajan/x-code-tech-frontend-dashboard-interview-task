@@ -5,21 +5,21 @@ import Link from "next/link";
 import { useTheme } from "@/context/themeContext";
 import { Computer, Moon, Sun } from "lucide-react";
 import { Button } from "../button/button";
-import { debounce } from "@/lib/utils";
+import { debounce, updateURLParams } from "@/lib/utils";
 import { useProducts } from "@/context/productContext";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export const Navbar = () => {
   const { setTheme, theme } = useTheme();
+  const { getProducts } = useProducts();
   const [toggle, setToggle] = React.useState<boolean>(false);
   const [search, setSearch] = React.useState<string>("");
   const handleToggle = () => {
     setToggle((pre) => !pre);
   };
-
-  const { getProducts } = useProducts();
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const debounceSearch = React.useMemo(
     () => debounce((value: string) => getProducts(value), 400),
     [getProducts]
@@ -29,7 +29,7 @@ export const Navbar = () => {
     const { value } = e.target;
     setSearch(value);
     debounceSearch(value);
-
+    updateURLParams({ search: search }, searchParams, router);
     // Update URL query param
     const params = new URLSearchParams(searchParams.toString());
     if (value) {
@@ -52,10 +52,10 @@ export const Navbar = () => {
             </Link>
           </div>
           <div className="hidden md:block">
-            <div className="flex-1 w-full max-w-screen">
+            <div className="flex-1 max-w-screen ">
               <Input
                 type="text"
-                placeholder="Search by name/vendor"
+                placeholder="Search by vendor/name"
                 onChange={handleSearchInputChange}
                 value={search}
                 className="w-full rounded-md max-w-xl ring-1 ring-gray-500 dark:ring-white focus-within:outline-0"
@@ -168,9 +168,9 @@ export const Navbar = () => {
               <Input
                 type="text"
                 name="search"
+                placeholder="Search by vendor/name"
                 id="search"
-                placeholder="Search"
-                className="w-full placeholder:text-sm dark:placeholder:text-white rounded-md dark:text-white text-black focus-within:ring-0 focus-within:outline-0"
+                className="w-full placeholder:text-sm dark:placeholder:text-black rounded-md dark:text-white text-black focus-within:ring-0 focus-within:outline-0"
               />
             </div>
             <Link

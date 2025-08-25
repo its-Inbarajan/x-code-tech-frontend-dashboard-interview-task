@@ -39,7 +39,7 @@ export async function GET(
   }
 }
 
-export async function UPDATE(
+export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
@@ -69,7 +69,7 @@ export async function UPDATE(
       );
 
     const response: IApiResponse<IProduct> = {
-      message: "Product Fetched successfully.",
+      message: "Product Updated successfully.",
       statusCode: 200,
       status: true,
       response: findAndUpdate,
