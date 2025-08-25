@@ -1,7 +1,9 @@
-## Product Dashboard - Next.js App Router
+## Product Dashboard - Next.js App Router 
 
 A full-stack dashboard built with **Next.js** App Router that displays a list of products with filtering, sorting, pagination, and CRUD operations.
 Includes a simple backend API using Next.js API routes with MongoDB (or mock data fallback).
+
+**Live Demo** [LINK](https://inbarajan-interview-task.vercel.app/)
 
 **Features**
 
