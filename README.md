@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Product Dashboard - Next.js App Router
 
-## Getting Started
+A full-stack dashboard built with **Next.js** App Router that displays a list of products with filtering, sorting, pagination, and CRUD operations.
+Includes a simple backend API using Next.js API routes with MongoDB (or mock data fallback).
 
-First, run the development server:
+**Features**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+✅ Products table with columns: **Name**, **Price**, **Stock**, **Category**, **Status**, **Vendor**
+✅ Pagination (server-side)
+✅ Sorting by Price, Stock, Created At (desc default)
+✅ Filtering by Category & Status
+✅ Search by name or vendor
+✅ View toggle: **Grid view** / **Table view**
+✅ CRUD: Create, Update, Delete products
+✅ Responsive design (mobile-friendly)
+✅ API with **Next.js App Router**
+✅ Bonus: Debounced search, Suspense boundaries, optimistic UI updates
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Tech Stack**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Next.js 14 (App Router)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  - TypeScript
 
-## Learn More
+  - MongoDB (optional) or in-memory mock data
 
-To learn more about Next.js, take a look at the following resources:
+  - Tailwind CSS for styling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  - React Context for state management
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  - React Toastify for notifications
 
-## Deploy on Vercel
+**Running with Mock Data**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If MongoDB is not connected, API will return data from mockProducts in memory.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Deployment on Vercel**
+
+1) Push to GitHub.
+2) Connect repository to Vercel.
+3) Add .env.local variables in Vercel Project Settings.
+4) Deploy.
+
+**How to Use**
+
+1) Use Filters to search by category/status.
+2) Use Tabs to toggle Grid / Table view.
+3) Pagination updates via URL params (uses useSearchParams()).
+4) Create / Edit / Delete products using forms.
+
+**Bonus Features**
+
+1) Debounced search input (prevents multiple API calls).
+2) Optimistic UI updates on Create, Update, Delete.
+3) Suspense boundaries for components using useSearchParams().
+4) Fully responsive layout.
